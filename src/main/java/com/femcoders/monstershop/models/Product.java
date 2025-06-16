@@ -9,13 +9,22 @@ import jakarta.validation.constraints.NotNull;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private Long id;
+
+    @Column(length = 50, nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private double price;
+
+    @Column(name = "image_url", nullable = false)
     private String imageUrl;
+
     private double rating;
+
+    @Column(name = "review_count")
     private int reviewCount;
+
     private boolean featured;
 
     public Product(String name, double price, String imageUrl, double rating, int reviewCount, boolean featured) {
