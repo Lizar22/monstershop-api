@@ -1,14 +1,15 @@
 package com.femcoders.monstershop.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private Long id;
     private String name;
     private double price;
@@ -17,16 +18,13 @@ public class Product {
     private int reviewCount;
     private boolean featured;
 
-    public Product() {
-    }
-
-    public Product(@NotBlank(message = "Name is required") @Size(min = 2, max = 50, message = "Name must contain min 2 and max 50 characters") String featured, @NotBlank(message = "Price is required") double reviewCount, @NotBlank("Image URL is required") String rating, @NotBlank("Rating is required") double imageUrl, double price, @NotBlank("Feature is required") boolean name) {
-        this.featured = featured;
-        this.reviewCount = reviewCount;
-        this.rating = rating;
-        this.imageUrl = imageUrl;
-        this.price = price;
+    public Product(String name, double price, String imageUrl, double rating, int reviewCount, boolean featured) {
         this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.reviewCount = reviewCount;
+        this.featured = featured;
     }
 
     public Long getId() {

@@ -9,13 +9,10 @@ public record ProductRequest(
         String name,
         @NotBlank(message = "Price is required")
         double price,
-        @NotBlank("Image URL is required")
+        @NotBlank(message = "Image URL is required")
         String imageUrl,
-        @NotBlank("Rating is required")
         double rating,
-        @NotBlank("Review count is required")
         int reviewCount,
-        @NotBlank("Feature is required")
         boolean featured
 ) {
 }
