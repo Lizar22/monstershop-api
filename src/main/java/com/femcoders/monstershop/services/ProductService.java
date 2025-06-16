@@ -1,5 +1,7 @@
 package com.femcoders.monstershop.services;
 
+import com.femcoders.monstershop.dtos.ProductMapper;
+import com.femcoders.monstershop.dtos.ProductResponse;
 import com.femcoders.monstershop.models.Product;
 import com.femcoders.monstershop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,8 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductResponse> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(product -> ProductMapper.entityToDto(product)).toList();
     }
 }

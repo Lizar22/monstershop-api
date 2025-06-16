@@ -1,5 +1,6 @@
 package com.femcoders.monstershop.controllers;
 
+import com.femcoders.monstershop.dtos.ProductResponse;
 import com.femcoders.monstershop.models.Product;
 import com.femcoders.monstershop.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,7 @@ public class ProductController {
     }
 
     @GetMapping("/api/products")
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
-        return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
     }
 }
