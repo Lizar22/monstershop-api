@@ -1,8 +1,6 @@
 package com.femcoders.monstershop.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-
 
 @Entity
 @Table(name = "products")
