@@ -1,8 +1,7 @@
 package com.femcoders.monstershop.controllers;
 
-import com.femcoders.monstershop.dtos.ProductRequest;
-import com.femcoders.monstershop.dtos.ProductResponse;
-import com.femcoders.monstershop.models.Product;
+import com.femcoders.monstershop.dtos.product.ProductRequest;
+import com.femcoders.monstershop.dtos.product.ProductResponse;
 import com.femcoders.monstershop.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

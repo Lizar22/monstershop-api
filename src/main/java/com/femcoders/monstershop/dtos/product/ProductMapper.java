@@ -1,4 +1,4 @@
-package com.femcoders.monstershop.dtos;
+package com.femcoders.monstershop.dtos.product;
 
 import com.femcoders.monstershop.models.Product;
 
