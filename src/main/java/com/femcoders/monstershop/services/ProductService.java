@@ -1,6 +1,7 @@
 package com.femcoders.monstershop.services;
 
 import com.femcoders.monstershop.dtos.ProductMapper;
+import com.femcoders.monstershop.dtos.ProductRequest;
 import com.femcoders.monstershop.dtos.ProductResponse;
 import com.femcoders.monstershop.models.Product;
 import com.femcoders.monstershop.repositories.ProductRepository;
@@ -19,5 +20,11 @@ public class ProductService {
     public List<ProductResponse> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(product -> ProductMapper.entityToDto(product)).toList();
+    }
+
+    public ProductResponse addProduct(ProductRequest productRequest) {
+        Product newProduct = ProductMapper.dtoToEntity(productRequest);
+        Product savedProduct = productRepository.save(newProduct);
+        return ProductMapper.entityToDto(savedProduct);
     }
 }

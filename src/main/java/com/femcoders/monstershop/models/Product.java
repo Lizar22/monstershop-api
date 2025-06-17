@@ -27,6 +27,9 @@ public class Product {
 
     private boolean featured;
 
+    public Product() {
+    }
+
     public Product(String name, double price, String imageUrl, double rating, int reviewCount, boolean featured) {
         this.name = name;
         this.price = price;
