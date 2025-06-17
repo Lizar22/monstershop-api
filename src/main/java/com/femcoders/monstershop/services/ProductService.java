@@ -34,6 +34,18 @@ public class ProductService {
         return ProductMapper.entityToDto(savedProduct);
     }
 
+    public ProductResponse updateProduct(Long id, ProductRequest productRequest) {
+        Product updatedProduct = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
+        updatedProduct.setName(productRequest.name());
+        updatedProduct.setPrice(productRequest.price());
+        updatedProduct.setImageUrl(productRequest.imageUrl());
+        updatedProduct.setRating(productRequest.rating());
+        updatedProduct.setReviewCount(productRequest.reviewCount());
+        updatedProduct.setFeatured(productRequest.featured());
+        Product newProduct = productRepository.save(updatedProduct);
+        return ProductMapper.entityToDto(newProduct);
+    }
+
     public void deleteProduct(Long id) {
         getById(id);
         productRepository.deleteById(id);
