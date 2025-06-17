@@ -27,14 +27,13 @@ public class Product {
     public Product() {
     }
 
-    public Product(List<Review> reviews, boolean featured, int reviewCount, double rating, String imageUrl, double price, String name) {
-        this.reviews = reviews;
-        this.featured = featured;
-        this.reviewCount = reviewCount;
-        this.rating = rating;
-        this.imageUrl = imageUrl;
-        this.price = price;
+    public Product(String name, double price, String imageUrl, double rating, int reviewCount, boolean featured) {
         this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+        this.reviewCount = reviewCount;
+        this.featured = featured;
     }
 
     public Long getId() {
