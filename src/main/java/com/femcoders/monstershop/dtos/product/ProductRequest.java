@@ -1,4 +1,4 @@
-package com.femcoders.monstershop.dtos;
+package com.femcoders.monstershop.dtos.product;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

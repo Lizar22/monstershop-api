@@ -1,4 +1,4 @@
-package com.femcoders.monstershop.dtos;
+package com.femcoders.monstershop.dtos.product;
 
 public record ProductResponse(
         String name,
