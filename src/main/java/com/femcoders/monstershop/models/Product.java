@@ -2,39 +2,39 @@ package com.femcoders.monstershop.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(length = 50, nullable = false)
     private String name;
-
     @Column(nullable = false)
     private double price;
-
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
-
     private double rating;
-
     @Column(name = "review_count")
     private int reviewCount;
-
     private boolean featured;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
     public Product() {
     }
 
-    public Product(String name, double price, String imageUrl, double rating, int reviewCount, boolean featured) {
-        this.name = name;
-        this.price = price;
-        this.imageUrl = imageUrl;
-        this.rating = rating;
-        this.reviewCount = reviewCount;
+    public Product(List<Review> reviews, boolean featured, int reviewCount, double rating, String imageUrl, double price, String name) {
+        this.reviews = reviews;
         this.featured = featured;
+        this.reviewCount = reviewCount;
+        this.rating = rating;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.name = name;
     }
 
     public Long getId() {
@@ -87,5 +87,13 @@ public class Product {
 
     public void setFeatured(boolean featured) {
         this.featured = featured;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
