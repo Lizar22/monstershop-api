@@ -8,6 +8,7 @@ import com.femcoders.monstershop.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ProductService {
@@ -20,6 +21,11 @@ public class ProductService {
     public List<ProductResponse> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(product -> ProductMapper.entityToDto(product)).toList();
+    }
+
+    public ProductResponse getById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
+        return ProductMapper.entityToDto(product);
     }
 
     public ProductResponse addProduct(ProductRequest productRequest) {
