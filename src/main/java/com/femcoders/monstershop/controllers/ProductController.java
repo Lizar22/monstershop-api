@@ -2,12 +2,14 @@ package com.femcoders.monstershop.controllers;
 
 import com.femcoders.monstershop.dtos.product.ProductRequest;
 import com.femcoders.monstershop.dtos.product.ProductResponse;
+import com.femcoders.monstershop.exceptions.ErrorResponse;
 import com.femcoders.monstershop.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +53,13 @@ public class ProductController {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<Map<String, String>> handleProductNotFound (NoSuchElementException exception) {
-        Map<String, String> error = new HashMap<>();
-        error.put("Error", exception.getMessage());
+    public ResponseEntity<ErrorResponse> handleProductNotFound (NoSuchElementException exception) {
+        ErrorResponse error = new ErrorResponse(
+                exception.getMessage(),
+                HttpStatus.NOT_FOUND.value(),
+                "PRODUCT_NOT_FOUND",
+                Instant.now().toString()
+        );
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
