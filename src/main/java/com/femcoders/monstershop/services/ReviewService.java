@@ -37,13 +37,4 @@ public class ReviewService {
         return ReviewMapper.entityToDto(savedReview);
 
     }
-
-
-//    public ReviewResponse addReview(Long productId, ReviewRequest reviewRequest) {
-//        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("Product not found"));
-//        Review newreview = ReviewMapper.dtoToEntity(reviewRequest);
-//        newreview.setProduct(product);
-//        Review savedReview = reviewRepository.save(newreview);
-//        return ReviewMapper.entityToDto(savedReview);
-//    }
 }
