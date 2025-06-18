@@ -24,7 +24,7 @@ public class ProductService {
     }
 
     public ProductResponse getByProductById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
+        Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id " + id));
         return ProductMapper.entityToDto(product);
     }
 
@@ -35,7 +35,7 @@ public class ProductService {
     }
 
     public ProductResponse updateProduct(Long id, ProductRequest productRequest) {
-        Product updatedProduct = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
+        Product updatedProduct = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id " + id));
         updatedProduct.setName(productRequest.name());
         updatedProduct.setPrice(productRequest.price());
         updatedProduct.setImageUrl(productRequest.imageUrl());
@@ -52,6 +52,6 @@ public class ProductService {
     }
 
     public Product getProductObjectById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
+        return productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id " + id));
     }
 }

@@ -25,7 +25,7 @@ public class ReviewService {
     }
 
     public List<ReviewResponse> getReviewsByProductId(Long productId) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("Product not found"));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("Product not found with id " + productId));
         return product.getReviews().stream().map(review -> ReviewMapper.entityToDto(review)).toList();
     }
 
@@ -35,6 +35,5 @@ public class ReviewService {
         newReview.setProduct(product);
         Review savedReview = reviewRepository.save(newReview);
         return ReviewMapper.entityToDto(savedReview);
-
     }
 }
