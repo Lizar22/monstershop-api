@@ -51,15 +51,4 @@ public class ProductController {
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<ErrorResponse> handleProductNotFound (NoSuchElementException exception) {
-        ErrorResponse error = new ErrorResponse(
-                exception.getMessage(),
-                HttpStatus.NOT_FOUND.value(),
-                "PRODUCT_NOT_FOUND",
-                Instant.now().toString()
-        );
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
 }

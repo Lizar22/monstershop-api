@@ -5,12 +5,14 @@ public class ErrorResponse {
     private int status;
     private String errorCode;
     private String timestamp;
+    private String path;
 
-    public ErrorResponse(String message, int status, String errorCode, String timestamp) {
+    public ErrorResponse(String message, int status, String errorCode, String timestamp, String path) {
         this.message = message;
         this.status = status;
         this.errorCode = errorCode;
         this.timestamp = timestamp;
+        this.path = path;
     }
 
     public String getMessage() {
@@ -27,5 +29,9 @@ public class ErrorResponse {
 
     public String getTimestamp() {
         return timestamp;
+    }
+
+    public String getPath() {
+        return path;
     }
 }
