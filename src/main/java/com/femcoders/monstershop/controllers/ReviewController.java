@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/reviews")
@@ -29,5 +32,12 @@ public class ReviewController {
     public ResponseEntity<ReviewResponse> addReview(@Valid @RequestBody ReviewRequest reviewRequest) {
         ReviewResponse addedReview = reviewService.addReview(reviewRequest);
         return new ResponseEntity<>(addedReview, HttpStatus.CREATED);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<Map<String, String>> handleProductNotFound (NoSuchElementException exception) {
+        Map<String, String> error = new HashMap<>();
+        error.put("Error", exception.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
