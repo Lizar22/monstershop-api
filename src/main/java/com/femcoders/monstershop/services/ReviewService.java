@@ -16,10 +16,12 @@ import java.util.NoSuchElementException;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
+    private final ProductService productService;
 
-    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository) {
+    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository, ProductService productService) {
         this.reviewRepository = reviewRepository;
         this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     public List<ReviewResponse> getReviewsByProductId(Long productId) {
@@ -27,11 +29,12 @@ public class ReviewService {
         return product.getReviews().stream().map(review -> ReviewMapper.entityToDto(review)).toList();
     }
 
-    public ReviewResponse addReview(Long productId, ReviewRequest reviewRequest) {
-        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("Product not found"));
-        Review newreview = ReviewMapper.dtoToEntity(reviewRequest);
-        newreview.setProduct(product);
-        Review savedReview = reviewRepository.save(newreview);
+    public ReviewResponse addReview(ReviewRequest reviewRequest) {
+        Product product = productService.getProductObjectById(reviewRequest.productId());
+        Review newReview = ReviewMapper.dtoToEntity(reviewRequest);
+        newReview.setProduct(product);
+        Review savedReview = reviewRepository.save(newReview);
         return ReviewMapper.entityToDto(savedReview);
+
     }
 }

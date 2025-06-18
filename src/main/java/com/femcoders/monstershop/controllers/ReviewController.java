@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/reviews")
 public class ReviewController {
     private final ReviewService reviewService;
 
@@ -18,15 +19,15 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/api/reviews/{productId}")
+    @GetMapping("/{productId}")
     public ResponseEntity<List<ReviewResponse>> getReviewsByProductId(@PathVariable Long productId) {
         List<ReviewResponse> reviews = reviewService.getReviewsByProductId(productId);
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    @PostMapping("/api/reviews")
-    public ResponseEntity<ReviewResponse> addReview(@RequestParam Long productId, @Valid @RequestBody ReviewRequest reviewRequest) {
-        ReviewResponse addedReview = reviewService.addReview(productId, reviewRequest);
+    @PostMapping
+    public ResponseEntity<ReviewResponse> addReview(@Valid @RequestBody ReviewRequest reviewRequest) {
+        ReviewResponse addedReview = reviewService.addReview(reviewRequest);
         return new ResponseEntity<>(addedReview, HttpStatus.CREATED);
     }
 }
