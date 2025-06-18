@@ -23,7 +23,7 @@ public class ProductService {
         return products.stream().map(product -> ProductMapper.entityToDto(product)).toList();
     }
 
-    public ProductResponse getById(Long id) {
+    public ProductResponse getByProductById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
         return ProductMapper.entityToDto(product);
     }
@@ -47,7 +47,11 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
-        getById(id);
+        getByProductById(id);
         productRepository.deleteById(id);
+    }
+
+    public Product getProductObjectById(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
     }
 }

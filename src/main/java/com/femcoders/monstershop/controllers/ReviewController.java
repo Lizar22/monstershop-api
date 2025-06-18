@@ -26,8 +26,8 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<ReviewResponse> addReview(@RequestParam Long productId, @Valid @RequestBody ReviewRequest reviewRequest) {
-        ReviewResponse addedReview = reviewService.addReview(productId, reviewRequest);
+    public ResponseEntity<ReviewResponse> addReview(@Valid @RequestBody ReviewRequest reviewRequest) {
+        ReviewResponse addedReview = reviewService.addReview(reviewRequest);
         return new ResponseEntity<>(addedReview, HttpStatus.CREATED);
     }
 }
