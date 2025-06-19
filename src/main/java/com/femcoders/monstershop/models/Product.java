@@ -10,15 +10,21 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 50, nullable = false)
     private String name;
+
     @Column(nullable = false)
     private double price;
+
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
+
     private double rating;
+
     @Column(name = "review_count")
     private int reviewCount;
+
     private boolean featured;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

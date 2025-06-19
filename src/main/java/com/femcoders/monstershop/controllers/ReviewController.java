@@ -2,12 +2,14 @@ package com.femcoders.monstershop.controllers;
 
 import com.femcoders.monstershop.dtos.review.ReviewRequest;
 import com.femcoders.monstershop.dtos.review.ReviewResponse;
+import com.femcoders.monstershop.exceptions.ErrorResponse;
 import com.femcoders.monstershop.services.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +34,5 @@ public class ReviewController {
     public ResponseEntity<ReviewResponse> addReview(@Valid @RequestBody ReviewRequest reviewRequest) {
         ReviewResponse addedReview = reviewService.addReview(reviewRequest);
         return new ResponseEntity<>(addedReview, HttpStatus.CREATED);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<Map<String, String>> handleProductNotFound (NoSuchElementException exception) {
-        Map<String, String> error = new HashMap<>();
-        error.put("Error", exception.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
