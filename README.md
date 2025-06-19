@@ -1,7 +1,3 @@
-Here's how your `README.md` will look when rendered on GitHub:
-
-<br>
-
 # 👾 MonsterShop API
 
 This is the backend API for **MonsterShop**, an e-commerce application where users can explore products, read reviews, and rate items. It is built using **Java 21**, **Spring Boot**, and **MySQL**, with a clean, layered architecture and RESTful design.
